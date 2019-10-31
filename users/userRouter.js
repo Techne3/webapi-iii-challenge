@@ -131,15 +131,19 @@ function validateUserId(req, res, next) {
 function validateUser(req, res, next) {
 
      const user = req.body
+     if(!Object.entries(user).length){
+         res.status(400).json({message: 'missing user data'})
+     }
     if(!user.name){
         res.status(400).json({message: 'missing required name field'})
     }
     next()
 };
 
+
 function validatePost(req, res, next) {
     const post = req.body
-    if(!post){
+    if(!Object.entries(post).length){
         res.status(400).json({message: 'missing post data'})
     }else if(!post.text){
         res.status(400).json({message: 'missing text field'})

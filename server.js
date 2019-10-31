@@ -12,7 +12,7 @@ server.use(helmet());
 server.use(express.json());
 
 function logger(req, res, next){
-  console.log(` ${Date.now() / 1000} ${req.method} to ${req.path} from ${req.url} `);
+  console.log(` [${new Date().toISOString()}] ${req.method} to ${req.path} from ${req.url} `);
 
   next();
 }
