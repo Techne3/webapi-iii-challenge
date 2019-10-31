@@ -120,6 +120,7 @@ function validateUserId(req, res, next) {
      usersDB.getById(id)
     .then(user => {
       if(user){
+        req.user = user;
           next();
       }else{
         res.status(400).json({message: 'invalid user id'});
@@ -143,7 +144,7 @@ function validateUser(req, res, next) {
 
 function validatePost(req, res, next) {
     const post = req.body
-    if(!Object.entries(post).length){
+    if(!Object.keys(post).length){
         res.status(400).json({message: 'missing post data'})
     }else if(!post.text){
         res.status(400).json({message: 'missing text field'})
